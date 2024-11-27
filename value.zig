@@ -1,6 +1,6 @@
 // Top-level declarations are order-independent:
-const std = @import("std");
 const print = std.debug.print;
+const std = @import("std");
 const os = std.os;
 const assert = std.debug.assert;
 
