@@ -1,19 +1,17 @@
 const std = @import("std");
+const expect = @import("std").testing.expect;
 
 pub fn main() !void {
-    // Simple print using debug
-    std.debug.print("Hello, World!\n", .{});
-
-    // Buffered writer setup
-    var bw = std.io.bufferedWriter(std.io.getStdOut().writer());
-    const stdout = bw.writer();
-
-    try stdout.print("running code base\n", .{});
-    try bw.flush();
+    const stdout = std.io.getStdOut().writer();
+    try stdout.print("Hello, {s}!\n", .{"world"});
 }
 
-test "simple test" {
-    var list = std.ArrayList(i32).init(std.testing.allocator);
-    defer list.deinit();
-    try list.append(42);
+test "comments" {
+    // Comments in Zig start with "//" and end at the next LF byte (end of line).
+    // The below line is a comment, and won't be executed.
+
+    //expect(false);
+
+    const x = true; // another comment
+    try expect(x);
 }
