@@ -118,7 +118,7 @@ fn dump(args: anytype) !void {
 const nullarray = [_:0]u8{ 1, 2, 3, 4 };
 
 test "null terminated array" {
-    // try expect(@TypeOf(array) == [4:0]u8);
+    //  try expect(@TypeOf(array) == [4:0]u8);
     try expect(nullarray.len == 4);
     try expect(nullarray[4] == 0);
 }
