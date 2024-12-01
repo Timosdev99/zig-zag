@@ -2,7 +2,7 @@ const assert = @import("std").debug.assert;
 const expect = @import("std").testing.expect;
 const mem = @import("std").mem;
 
-const array = [_]u8{ 'h', 'e', 'l', 'l', 'o' };
+const array = [_]u8{ 'h', 'e', 'l', 'l', 'o' }; 
 
 comptime {
     assert(array.len == 5);
