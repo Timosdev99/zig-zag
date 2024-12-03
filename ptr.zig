@@ -34,3 +34,13 @@ test "pointer slicing" {
     slice[1] += 1;
     try expect(array[3] == 5);
 }
+
+test "comptime pointers" {
+    comptime {
+        var x: i32 = 1;
+        const ptr = &x;
+        ptr.* += 1;
+        x += 1;
+        try expect(ptr.* == 3);
+    }
+}
