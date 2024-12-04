@@ -1,4 +1,5 @@
 const expect = @import("std").testing.expect;
+const std = @import("std");
 
 test "address of syntax" {
     const x: i32 = 1234;
@@ -43,4 +44,27 @@ test "comptime pointers" {
         x += 1;
         try expect(ptr.* == 3);
     }
+}
+
+// test "topointer and toInt" {
+//     const point =  @ptrFromInt(*i32, 0xdeadbee0);
+//     const addr = @intFromPtr(point);
+//     try expect(@TypeOf(addr) == usize);
+//     try expect(addr == 0xdeadbee0);
+// }
+
+test "pointer casting" {
+    const bytes align(@alignOf(u32)) = [_]u8{ 0x12, 0x12, 0x12, 0x12 };
+    const u32_value = std.mem.bytesAsSlice(u32, bytes[0..])[0];
+    try expect(u32_value == 0x12121212);
+}
+
+test "variable alignment" {
+    var x: i32 = 1234;
+    const align_of_i32 = @alignOf(@TypeOf(x));
+    try expect(@TypeOf(&x) == *i32);
+    try expect(*i32 == *align(align_of_i32) i32);
+    // if (std.Target.current.cpu.arch == .x86_64) {
+    //     try expect(@typeInfo(*i32).Pointer.alignment == 4);
+    // }
 }
