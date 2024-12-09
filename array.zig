@@ -2,7 +2,7 @@ const assert = @import("std").debug.assert;
 const expect = @import("std").testing.expect;
 const mem = @import("std").mem;
 
-const array = [_]u8{ 'h', 'e', 'l', 'l', 'o' }; 
+const array = [_]u8{ 'h', 'e', 'l', 'l', 'o' };
 
 comptime {
     assert(array.len == 5);
@@ -95,30 +95,10 @@ fn dump(args: anytype) !void {
     try expect(args.@"3"[1] == 'i');
 }
 
-// const mat4x4 = [4][4]f32{
-//     [_]f32{ 1.0, 0.0, 0.0, 0.0 },
-//     [_]f32{ 0.0, 1.0, 0.0, 1.0 },
-//     [_]f32{ 0.0, 0.0, 1.0, 0.0 },
-//     [_]f32{ 0.0, 0.0, 0.0, 1.0 },
-// };
-//test "multidimensional arrays" {
-// Access the 2D array by indexing the outer array, and then the inner array.
-//try expect(mat4x4[1][1] == 1.0);
-
-// Here we iterate with for loops.
-//     for (mat4x4) |row, row_index| {
-//         for (row) |cell, column_index| {
-//             if (row_index == column_index) {
-//                 try expect(cell == 1.0);
-//             }
-//         }
-//     }
-// }
-
 const nullarray = [_:0]u8{ 1, 2, 3, 4 };
 
 test "null terminated array" {
-    //  try expect(@TypeOf(array) == [4:0]u8);
+    try expect(@TypeOf(nullarray) == [4:0]u8);
     try expect(nullarray.len == 4);
     try expect(nullarray[4] == 0);
 }
