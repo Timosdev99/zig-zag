@@ -46,12 +46,12 @@ test "comptime pointers" {
     }
 }
 
-// test "topointer and toInt" {
-//     const point =  @ptrFromInt(*i32, 0xdeadbee0);
-//     const addr = @intFromPtr(point);
-//     try expect(@TypeOf(addr) == usize);
-//     try expect(addr == 0xdeadbee0);
-// }
+test "@intFromPtr and @ptrFromInt" {
+    const ptr: *i32 = @ptrFromInt(0xdeadbee0);
+    const addr = @intFromPtr(ptr);
+    try expect(@TypeOf(addr) == usize);
+    try expect(addr == 0xdeadbee0);
+}
 
 test "pointer casting" {
     const bytes align(@alignOf(u32)) = [_]u8{ 0x12, 0x12, 0x12, 0x12 };
