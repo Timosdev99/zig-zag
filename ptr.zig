@@ -53,6 +53,12 @@ test "@intFromPtr and @ptrFromInt" {
     try expect(addr == 0xdeadbee0);
 }
 
+test "ptrcast" {
+    const byte align(@alignOf(u32)) = [_]u8{ 0x12, 0x12, 0x12, 0x12 };
+    const u32_ptr: *const u32 = @ptrCast(&byte);
+    try expect(u32_ptr.* == 0x12121212);
+}
+
 test "pointer casting" {
     const bytes align(@alignOf(u32)) = [_]u8{ 0x12, 0x12, 0x12, 0x12 };
     const u32_value = std.mem.bytesAsSlice(u32, bytes[0..])[0];
