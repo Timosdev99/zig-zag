@@ -1,5 +1,6 @@
 const expect = @import("std").testing.expect;
 const std = @import("std");
+const builtin = @import("builtin");
 
 test "address of syntax" {
     const x: i32 = 1234;
@@ -70,9 +71,11 @@ test "variable alignment" {
     const align_of_i32 = @alignOf(@TypeOf(x));
     try expect(@TypeOf(&x) == *i32);
     try expect(*i32 == *align(align_of_i32) i32);
-    // if (std.Target.current.cpu.arch == .x86_64) {
-    //     try expect(@typeInfo(*i32).Pointer.alignment == 4);
-    // }
+
+    if (builtin.target.cpu.arch == .x86_64) {
+        const type_info = @typeInfo(*i32);
+        try expect(type_info.pointer.alignment == 4);
+    }
 }
 
 var foo: u8 align(4) = 100;
