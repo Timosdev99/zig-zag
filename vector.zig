@@ -32,3 +32,11 @@ test "Conversion between vectors, arrays, and slices" {
     try expectEqual(slice[offset + 1], vec2[1]);
     try expectEqual(vec2, vec3);
 }
+
+pub fn main() void {
+    const array = [_]f32{ 1.0, 3.0, 6.0, 8.0 };
+
+    const vec2 = @Vector(2, f32){ array[1], array[3] };
+
+    std.debug.print("the vector are: {any}\n", .{vec2});
+}
