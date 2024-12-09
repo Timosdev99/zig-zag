@@ -81,9 +81,8 @@ test "variable alignment" {
 var foo: u8 align(4) = 100;
 
 test "global variable alignment" {
-    //try expect(@typeInfo(@TypeOf(&foo)).Pointer.alignment == 4);
+    const align_info = @TypeOf(&foo);
+    const type_info = @typeInfo(align_info);
+    try expect(type_info.pointer.alignment == 4);
     try expect(@TypeOf(&foo) == *align(4) u8);
-    // const as_pointer_to_array: *[1]u8 = &foo;
-    // const as_slice: []u8 = as_pointer_to_array;
-    // try expect(@TypeOf(as_slice) == []align(4) u8);
 }
