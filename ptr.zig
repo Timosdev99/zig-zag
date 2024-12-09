@@ -106,3 +106,10 @@ test "function alignment" {
     try expect(@TypeOf(noop4) == fn () void);
     try expect(@TypeOf(&noop4) == *align(4) const fn () void);
 }
+
+test "allowzero" {
+    var zero: usize = 0;
+    _ = &zero;
+    const ptr: *allowzero i32 = @ptrFromInt(zero);
+    try expect(@intFromPtr(ptr) == 0);
+}
