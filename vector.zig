@@ -1,5 +1,6 @@
 const std = @import("std");
 const expectEqual = std.testing.expectEqual;
+const expect = std.testing.expect;
 
 test "Basic vector usage" {
     // Vectors have a compile-time known length and base type.
@@ -31,6 +32,11 @@ test "Conversion between vectors, arrays, and slices" {
     try expectEqual(slice[offset], vec2[0]);
     try expectEqual(slice[offset + 1], vec2[1]);
     try expectEqual(vec2, vec3);
+}
+
+test "volatile" {
+    const mmio_ptr: *volatile u8 = @ptrFromInt(0x12345678);
+    try expect(@TypeOf(mmio_ptr) == *volatile u8);
 }
 
 pub fn main() void {
