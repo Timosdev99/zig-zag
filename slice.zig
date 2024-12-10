@@ -1,5 +1,6 @@
 const std = @import("std");
-const expect = std.testing.expectEqualSlices;
+const expectequal = std.testing.expectEqualSlices;
+const expect = std.testing.expect;
 
 test "slice array" {
     var array = [_]i32{ 1, 2, 3, 4, 5 };
@@ -8,5 +9,5 @@ test "slice array" {
     const slice = array[know_in_runtime..array.len];
     const altslice: []const i32 = &.{ 1, 2, 3, 4, 5 };
 
-    try expect(i32, slice, altslice);
+    try expectequal(i32, slice, altslice);
 }
