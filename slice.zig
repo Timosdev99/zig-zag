@@ -10,4 +10,5 @@ test "slice array" {
     const altslice: []const i32 = &.{ 1, 2, 3, 4, 5 };
 
     try expectequal(i32, slice, altslice);
+    try expect(@TypeOf(slice) == []i32);
 }
