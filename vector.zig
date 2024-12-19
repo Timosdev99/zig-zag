@@ -42,7 +42,8 @@ test "volatile" {
 pub fn main() void {
     const array = [_]f32{ 1.0, 3.0, 6.0, 8.0 };
 
-    const vec2 = @Vector(2, f32){ array[1], array[3] };
-
+    const vec2: @Vector(3, f32) = array[0..3].*;
+    const vec3 = @Vector(2, f32){ array[1], array[3] };
     std.debug.print("the vector are: {any}\n", .{vec2});
+    std.debug.print("the vector are: {any}\n", .{vec3});
 }
