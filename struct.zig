@@ -219,3 +219,20 @@ fn check(argrs: anytype) !void {
     try expect(argrs.s[0] == 'h');
     try expect(argrs.s[1] == 'i');
 }
+
+const complextypetag = enum {
+    ok,
+    notok,
+};
+
+const complex = union(complextypetag) { ok: u8, notok: bool };
+
+test "checking" {
+    var c = complex{ .ok = 42 };
+    switch (c) {
+        complextypetag.ok => |*val| val.* += 1,
+        complextypetag.notok => unreachable,
+    }
+
+    try expect(c.ok == 43);
+}
