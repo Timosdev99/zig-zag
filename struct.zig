@@ -228,7 +228,7 @@ const complextypetag = enum {
 const complex = union(complextypetag) { ok: u8, notok: bool };
 
 test "checking" {
-    var c = complex{ .ok = 42 };
+    const c = complex{ .ok = 42 };
     switch (c) {
         complextypetag.ok => |*val| val.* += 1,
         complextypetag.notok => unreachable,
