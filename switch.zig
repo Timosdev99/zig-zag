@@ -46,6 +46,7 @@ test "switch simple" {
 // Switch expressions can be used outside a function:
 const os_msg = switch (builtin.target.os.tag) {
     .linux => "we found a linux user",
+    .windows => "you are a window user",
     else => "not a linux user",
 };
 
@@ -61,4 +62,8 @@ test "switch inside function" {
         },
         else => {},
     }
+}
+
+pub fn main() !void {
+    std.debug.print("{s}\n", .{os_msg});
 }
